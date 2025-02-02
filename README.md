@@ -11,6 +11,17 @@ The author of the async-version is Alexander AXO (home@samopoznanie.ru).
 ```python
 from outline_vpn_async.outline_vpn import OutlineVPN
 
+# Get keys from server (without SSL):
+async with OutlineVPN(api_url=server_api) as client:
+    server_keys = await client.get_keys()
+for server_key in server_keys:
+
+# Get server info (without SSL)
+async with OutlineVPN(api_url=api_url) as client:
+    server_info = await client.get_server_information()
+    real_active_keys = len(await client.get_keys())
+    all_traffic = await client.get_transferred_data()
+
 # Setup the access with the API URL (Use the one provided to you after the server setup)
 client = OutlineVPN(api_url="https://127.0.0.1:51083/xlUG4F5BBft4rSrIvDSWuw", cert_sha256="4EFF7BB90BCE5D4A172D338DC91B5B9975E197E39E3FA4FC42353763C4E58765")
 ...
